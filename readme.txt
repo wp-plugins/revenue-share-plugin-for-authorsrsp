@@ -4,8 +4,8 @@ Tags: Adense, Free Revenue Share, Guest Bloggers, plugin, Revenue Share, Wordpre
 Requires at least: 3.0.1
 Tested up to: 3.5.1
 Stable tag: 1.0.1
-Licence: GPLV2
-Licence URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPLV2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 The plugin enables revenue sharing for authors on your wordpress site.
 
