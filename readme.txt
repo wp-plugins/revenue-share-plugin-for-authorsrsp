@@ -9,7 +9,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 The plugin enables adsense revenue sharing for authors on your wordpress site.
 
-
 == Description ==
 Revenue Share Wordpress Plugin for Authors:
 
@@ -37,6 +36,7 @@ Upload the contents of the zip file to your plugin directory.
 You can contact me via my personal website http://www.obscurant1st.biz
 
 == Screenshots ==
+
 1. **Admin Settings** - Screenshot for the Admin Menu
 2. **Admin Settings - Complete** - Dropdown Box for the Adspot
 3. **User Profile Field** - Publisher ID field in the User profile
