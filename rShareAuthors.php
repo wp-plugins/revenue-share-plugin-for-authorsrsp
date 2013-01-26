@@ -28,7 +28,7 @@ add_options_page('Revenue Share Plugin', 'RSP Menu', 'install_plugins', 'RSP_plu
 <?php // display the admin options page
 function RSP_options_page() {
 ?>
-<link href="<?php echo plugins_url().'/rShareAuthors'; ?>/rsp_style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="<?php echo plugins_url(); ?>/rsp_style.css" rel="stylesheet" type="text/css" media="screen" />
 <div class="left_rsp">
 <h2>Adsense Revenue Share Plugin</h2>
 Set the publication id and the position of the ad here!
