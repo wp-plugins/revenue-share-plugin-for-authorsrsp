@@ -1,9 +1,10 @@
 === Revenue Share for Authors (RSP for Wordpress) ===
+Contributors:
 Donate link: http://obscurant1st.biz/blog/donate-support/
 Tags: Adense, Free Revenue Share, Guest Bloggers, plugin, Revenue Share, Wordpress, Wordpress plugin, Wordpress Revenue Share
 Requires at least: 3.0.1
 Tested up to: 3.5.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLV2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,7 +37,14 @@ Upload the contents of the zip file to your plugin directory.
 You can contact me via my personal website http://www.obscurant1st.biz
 
 == Screenshots ==
-
 1. **Admin Settings** - Screenshot for the Admin Menu
 2. **Admin Settings - Complete** - Dropdown Box for the Adspot
 3. **User Profile Field** - Publisher ID field in the User profile
+
+== Changelog ==
+= 1.0.2 =
+* Fixed a Stylesheet error
+
+== Upgrade Notice ==
+= 1.0.2 =
+* Update the plugin to get a better admin page for RSP.
