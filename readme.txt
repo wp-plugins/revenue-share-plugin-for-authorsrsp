@@ -4,7 +4,7 @@ Donate link: http://obscurant1st.biz/blog/donate-support/
 Tags: Adense, Free Revenue Share, Guest Bloggers, plugin, Revenue Share, Wordpress, Wordpress plugin, Wordpress Revenue Share
 Requires at least: 3.0.1
 Tested up to: 3.5.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLV2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,7 +44,11 @@ You can contact me via my personal website http://www.obscurant1st.biz
 == Changelog ==
 = 1.0.2 =
 * Fixed a Stylesheet error
+= 1.0.3 =
+* Fixed a few bugs
 
 == Upgrade Notice ==
 = 1.0.2 =
 * Update the plugin to get a better admin page for RSP.
+= 1.0.3 =
+* Bug Fix Release
