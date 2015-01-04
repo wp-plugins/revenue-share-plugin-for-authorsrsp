@@ -1,20 +1,16 @@
 <?php // Creating the widget
 require_once(plugin_dir_path( __FILE__ ) . '/rShareAuthors.php');
 class rspwidget extends WP_Widget {
-
     function __construct() {
     parent::__construct(
     // Base ID of your widget
     'rspwidget',
-
     // Widget name will appear in UI
     __('RSP Ad Widget', 'rspwidget_ad'),
-
     // Widget description
     array( 'description' => __( 'Revenue share Plugin(RSP) Widget', 'rspwidget_ad' ), )
         );
     }
-
     // Creating widget front-end
     // This is where the action happens
     public function widget( $args, $instance ) {
@@ -30,7 +26,6 @@ class rspwidget extends WP_Widget {
         global $post;
         $authorId = $post->ID;
     }
-
     // Widget Backend
     public function form( $instance ) {
         $title = ! empty( $instance['title'] ) ? $instance['title'] : __( '', 'rspwidget_ad' );
@@ -51,7 +46,6 @@ class rspwidget extends WP_Widget {
     </p>
 <?php
     }
-
     // Updating widget replacing old instances with new
     public function update( $new_instance, $old_instance ) {
             $instance = array();
@@ -61,7 +55,6 @@ class rspwidget extends WP_Widget {
             return $instance;
     }
 } // Class rspwidget ends here
-
 //create the ad for the widget
 function adsensewidgetad($x, $y) {
             $options = get_option('RSP_options');
@@ -118,7 +111,6 @@ google_ad_height = '.$y.';
         }
             return $ad_content;
     }
-
 // Register and load the widget
 function rsp_load_widget() {
 	register_widget( 'rspwidget' );

@@ -20,7 +20,6 @@ License: GPL2
 */
 ?>
 <?php require_once(plugin_dir_path( __FILE__ ) . 'widgetad.php'); ?>
-
 <?php // add the admin options page
     add_action('admin_menu', 'plugin_admin_add_page');
     function plugin_admin_add_page() {
@@ -40,7 +39,6 @@ License: GPL2
             <div align=center><br />
                 <input class="rsp_submit_buttom" id="RSP_main" name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" /></div>
         </form>
-
 <?php
 
                                  $options = get_option('RSP_options');
@@ -132,7 +130,6 @@ add_action( 'edit_user_profile', 'adshare_profile_fields' );
             </tr>
         </table>
     <?php }
-
     add_action( 'personal_options_update', 'adshare_save_profile_fields' );
     add_action( 'edit_user_profile_update', 'adshare_save_profile_fields' );
     function adshare_save_profile_fields( $user_id ) {
@@ -141,7 +138,6 @@ add_action( 'edit_user_profile', 'adshare_profile_fields' );
         }*/
         update_usermeta( $user_id, 'RSP_text_string', $_POST['RSP_text_string'] );
     }
-
 function adsense_ad($content) {
     $options = get_option('RSP_options');
     if (!get_option('RSP_options')) {
@@ -171,8 +167,6 @@ function adsense_ad($content) {
     }
     //randomize the admin/author accordingly
     if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
-
-
     if ($input[0] == 'pub-0000') {
         return $content;
     }
@@ -196,7 +190,6 @@ google_ad_height = 60;
         return substr_replace($content, $ad_content, $insert_ad+2, 0);
     }
 }
-
 add_filter('the_content', 'adsense_ad');
 ?>
 <?php
