@@ -40,7 +40,6 @@ License: GPL2
                 <input class="rsp_submit_buttom" id="RSP_main" name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" /></div>
         </form>
 <?php
-
                                  $options = get_option('RSP_options');
                                  echo '<br /><h3>Current Admin Settings</h3>';
                                  echo 'Adsense Publisher Id:<b>';
@@ -82,8 +81,6 @@ License: GPL2
         add_settings_field('RSP_text_string', 'RSP Adsense Pub Id', 'RSP_setting_string', 'RSP_plugin', 'RSP_main');
         add_settings_field('radio_option1', 'RSP Adsense AD Spot', 'RSP_setting_position', 'RSP_plugin', 'RSP_main');
         add_settings_field('adshare_percentage', 'RSP Author Adshare Percent', 'RSP_setting_percent', 'RSP_plugin', 'RSP_main');
-        //add_settings_field('radio_option2', 'RSP Adsense Pub Id', 'RSP_setting_string', 'RSP_plugin', 'RSP_main');
-        //add_settings_field('RSP_text_string', 'RSP Adsense Pub Id', 'RSP_setting_string', 'RSP_plugin', 'RSP_main');
 }?>
 <?php // validate our options
     function RSP_options_validate($input) {
@@ -95,12 +92,10 @@ License: GPL2
         $options = get_option('RSP_options');
         echo "<input id='RSP_main' name='RSP_options[RSP_text_string]' size='25' type='text' value='{$options['RSP_text_string']}' />"; ?><br>
 <?php } ?>
-
 <?php function RSP_setting_percent() {
   $options = get_option('RSP_options');
   echo "<input id='RSP_main' name='RSP_options[adshare_percentage]' maxlength='2' size='2' type='text' value='{$options['adshare_percentage']}' />"; ?><br>
   <?php } ?>
-
 <?php function RSP_setting_position() {
     $options = get_option('RSP_options'); ?>
     <select id='RSP_main' name="RSP_options[radio_option1]">
@@ -108,7 +103,6 @@ License: GPL2
         <option value='Middle' <?php selected( $options['radio_option1'], 'Middle' ); ?>>Middle Spot</option>
         <option value='Bottom' <?php selected( $options['radio_option1'], 'Bottom' ); ?>>Bottom Spot</option>
     </select>
-
    <br />
 <?php } ?>
 <?php function RSP_section_text() {
@@ -117,7 +111,6 @@ echo '';
 <?php
 add_action( 'show_user_profile', 'adshare_profile_fields' );
 add_action( 'edit_user_profile', 'adshare_profile_fields' );
-
     function adshare_profile_fields( $user ) { ?>
         <h3>Revenu Share For Authors:</h3>
         <table class="form-table">
@@ -133,9 +126,6 @@ add_action( 'edit_user_profile', 'adshare_profile_fields' );
     add_action( 'personal_options_update', 'adshare_save_profile_fields' );
     add_action( 'edit_user_profile_update', 'adshare_save_profile_fields' );
     function adshare_save_profile_fields( $user_id ) {
-        /*if ( !current_user_can( 'edit_user', $user_id ) ){
-            return false;
-        }*/
         update_usermeta( $user_id, 'RSP_text_string', $_POST['RSP_text_string'] );
     }
 function adsense_ad($content) {
@@ -147,25 +137,16 @@ function adsense_ad($content) {
     if (array_key_exists('radio_option1', $options)) {
         $position =  $options['radio_option1'];
     }
-    /*if (array_key_exists('radio_option2', $options)) {
-        $position =  $options['radio_option2'];
-    }
-    if (array_key_exists('radio_option3', $options)) {
-        $position =  $options['radio_option3'];
-    }*/
     global $post;
     $authorId = $post->ID;
-
-    $adpercent = $options['adshare_percentage'];
-    //store both adsense pub ids(author and admin)
+    $adpercent = $options['adshare_percentage']; //store both adsense pub ids(author and admin)
     if(get_the_author_meta( 'RSP_text_string', $authorId ) != ""){
       $input1 = $options['RSP_text_string'];
       $input2 = get_the_author_meta( 'RSP_text_string', $authorId );
     } else {
       $input1 = $options['RSP_text_string'];
       $input2 = $input1;
-    }
-    //randomize the admin/author accordingly
+    }//randomize the admin/author accordingly
     if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
     if ($input[0] == 'pub-0000') {
         return $content;
@@ -199,7 +180,6 @@ add_filter('the_content', 'adsense_ad');
         update_option('RSP_options[RSP_text_string]','pub-0000');
         update_option('RSP_options[adshare_percentage]','00');
     }
-
     register_deactivation_hook(__FILE__, 'RSP_deactivate' );
     function RSP_deactivate() {
         delete_option( 'RSP_options' );

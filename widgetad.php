@@ -3,35 +3,26 @@ require_once(plugin_dir_path( __FILE__ ) . '/rShareAuthors.php');
 class rspwidget extends WP_Widget {
     function __construct() {
     parent::__construct(
-    // Base ID of your widget
     'rspwidget',
-    // Widget name will appear in UI
     __('RSP Ad Widget', 'rspwidget_ad'),
-    // Widget description
     array( 'description' => __( 'Revenue share Plugin(RSP) Widget', 'rspwidget_ad' ), )
         );
-    }
-    // Creating widget front-end
-    // This is where the action happens
+    } // Creating widget front-end |  This is where the action happens
     public function widget( $args, $instance ) {
         echo $args['before_widget'];
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
-		}
-        // before and after widget arguments are defined by themes
-        // This is where you run the code and display the output
+		} // before and after widget arguments are defined by themes |  This is where you run the code and display the output
         $addimensions = split ("\x", $instance['widgetads']);
         echo adsensewidgetad($addimensions[0], $addimensions[1]);
         echo $args['after_widget'];
         global $post;
         $authorId = $post->ID;
-    }
-    // Widget Backend
+    }    // Widget Backend
     public function form( $instance ) {
         $title = ! empty( $instance['title'] ) ? $instance['title'] : __( '', 'rspwidget_ad' );
         $widgetads = ! empty( $instance['widgetads'] ) ? $instance['widgetads'] : __( '', 'rspwidget_ad' );
-    // Widget admin form
-?>
+?> // Widget admin form
     <p>
         <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'title' ); ?></label>
         <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
@@ -45,8 +36,7 @@ class rspwidget extends WP_Widget {
         </select>
     </p>
 <?php
-    }
-    // Updating widget replacing old instances with new
+    }    // Updating widget replacing old instances with new
     public function update( $new_instance, $old_instance ) {
             $instance = array();
             //$instance = $old_instance;
@@ -54,8 +44,7 @@ class rspwidget extends WP_Widget {
             $instance['widgetads'] = ( ! empty( $new_instance['widgetads'] ) ) ? strip_tags( $new_instance['widgetads'] ) : '';
             return $instance;
     }
-} // Class rspwidget ends here
-//create the ad for the widget
+} // Class rspwidget ends here | create the ad for the widget
 function adsensewidgetad($x, $y) {
             $options = get_option('RSP_options');
             if (!get_option('RSP_options')) {
@@ -64,29 +53,19 @@ function adsensewidgetad($x, $y) {
             $position = '';
             if (array_key_exists('radio_option1', $options)) {
                 $position =  $options['radio_option1'];
-            }
-            /*if (array_key_exists('radio_option2', $options)) {
-            $position =  $options['radio_option2'];
-            }
-            if (array_key_exists('radio_option3', $options)) {
-            $position =  $options['radio_option3'];
-            }*/
-            //get the admin pecentage
+            }            //get the admin pecentage
             global $post;
             $authorId = $post->ID;
 
-            $adpercent = $options['adshare_percentage'];
-            //store both adsense pub ids(author and admin)
+            $adpercent = $options['adshare_percentage']; //store both adsense pub ids(author and admin)
             if(get_the_author_meta( 'RSP_text_string', $authorId ) != ""){
                 $input1 = $options['RSP_text_string'];
                 $input2 = get_the_author_meta( 'RSP_text_string', $authorId );
             } else {
                 $input1 = $options['RSP_text_string'];
                 $input2 = $input1;
-            }
-            //randomize the admin/author accordingly
+            }            //randomize the admin/author accordingly
             if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
-
             if ($input == 'pub-0000') {
                 return 'Configure PUB ID!';
             }
