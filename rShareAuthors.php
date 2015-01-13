@@ -3,7 +3,7 @@
 Plugin Name: Revenue Share for Authors(RSP)
 Plugin URI: http://obscurant1st.biz
 Description: The plugin enables revenue sharing for authors on your wordpress site.
-Version: 2.0.1
+Version: 2.0.2
 Author: Plato P.
 Author URI: http://www.techtuft.com
 License: GPL2
