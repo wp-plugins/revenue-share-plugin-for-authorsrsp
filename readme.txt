@@ -8,7 +8,7 @@ Stable tag: 2.0.1
 License: GPLV2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The plugin enables adsense revenue sharing for authors on your wordpress site.
+This plugin enables adsense revenue sharing for authors on your wordpress site.
 
 == Description ==
 Revenue Share Wordpress Plugin for Authors:
@@ -17,16 +17,28 @@ This plugin helps you to give a small reward to your guest blog writers in terms
 
 This plugin adds a field to all your blog post authors' profiles for inserting their Google adsense publisher id and creates a Settings page which will be accessible to admin of the website. The settings page include a field to fill up admin's adsense pub id as well as the position where the ad should be displayed along with the option to add a widget on the sidebar.
 
-Features:<br />
+= Features: =<br /> 
 1. Revenue for Both Admins and Authors<br />
 2. Select the Ad spot from Top/Bottom/Middle<br />
 3. No credit link on your blog<br />
 4. The simplest settings page you have ever seen for a plugin.<br />
 5. Supports 468x60px ads(easy customization).<br />
-6. *New* Now supports widget ads
-7. *New* Can change the ad percentage like you guys requested.
+6. *New* Now supports widget ads <br />
+7. *New* Can change the ad percentage like you guys requested. <br />
+8. *New* Added 8 different short codes for 8 different ad sizes. <br />
 
-Note: Please use it wisely and never add adsense ads on websites with illegal contents or website which are not in terms with Google Adsense TOS.
+= Available Shortcodes: =<br />
+* [rspad300x250]
+* [rspad300x250]
+* [rspad336x280]
+* [rspad728x90]
+* [rspad300x600]
+* [rspad320x100]
+* [rspad468x60]
+* [rspad300x1050]
+* [rspad970x90]
+
+Note: Please use it wisely and never add adsense ads on websites with illegal contents or website which are not in terms with Google Adsense TOS. <br />
 Also be careful about the number of ads since adsense doesn't allow websites to have more than 3 ads on any webpage.
 
 Read Google Adsense TOS Here: https://www.google.com/adsense/localized-terms
@@ -51,6 +63,8 @@ You can contact me via my personal website http://www.techtuft.com
 = 2.0.1 =
 * Added option to set the ad share percentage
 * Added a sidebar widget to display the ad with the revenue sharing capability
+= 2.0.2 =
+* Added 8 different shortcodes.
 
 == Upgrade Notice ==
 = 1.0.2 =
@@ -59,3 +73,5 @@ You can contact me via my personal website http://www.techtuft.com
 * Bug Fix Release
 = 2.0.1 =
 * All New Revamped RSP
+= 2.0.2 =
+* Shortcodes now available

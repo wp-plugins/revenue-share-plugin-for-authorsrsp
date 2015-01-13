@@ -185,3 +185,120 @@ add_filter('the_content', 'adsense_ad');
         delete_option( 'RSP_options' );
     }
 ?>
+<?php
+  function rspad300x250_func( $atts ) {
+    $atts = shortcode_atts(
+    array(
+      'width' => '300',
+      'height' => '250',
+    ), $atts, 'rspad300x250' );
+
+    return adsenseshortcutad($atts['width'],$atts['height']);
+  }
+  function rspad336x280_func( $atts ) {
+    $atts = shortcode_atts(
+    array(
+      'width' => '336',
+      'height' => '280',
+    ), $atts, 'rspad336x280' );
+
+    return adsenseshortcutad($atts['width'],$atts['height']);
+  }
+  function rspad728x90_func( $atts ) {
+    $atts = shortcode_atts(
+    array(
+      'width' => '728',
+      'height' => '90',
+    ), $atts, 'rspad728x90' );
+
+    return adsenseshortcutad($atts['width'],$atts['height']);
+  }
+  function rspad300x600_func( $atts ) {
+    $atts = shortcode_atts(
+    array(
+      'width' => '300',
+      'height' => '600',
+    ), $atts, 'rspad300x600' );
+
+    return adsenseshortcutad($atts['width'],$atts['height']);
+  }
+  function rspad320x100_func( $atts ) {
+    $atts = shortcode_atts(
+    array(
+      'width' => '320',
+      'height' => '100',
+    ), $atts, 'rspad320x100' );
+
+    return adsenseshortcutad($atts['width'],$atts['height']);
+  }
+  function rspad468x60_func( $atts ) {
+    $atts = shortcode_atts(
+    array(
+      'width' => '468',
+      'height' => '60',
+    ), $atts, 'rspad468x60' );
+
+    return adsenseshortcutad($atts['width'],$atts['height']);
+  }
+  function rspad300x1050_func( $atts ) {
+    $atts = shortcode_atts(
+    array(
+      'width' => '300',
+      'height' => '1050',
+    ), $atts, 'rspad300x1050' );
+
+    return adsenseshortcutad($atts['width'],$atts['height']);
+  }
+  function rspad970x90_func( $atts ) {
+    $atts = shortcode_atts(
+    array(
+      'width' => '970',
+      'height' => '90',
+    ), $atts, 'rspad970x90' );
+
+    return adsenseshortcutad($atts['width'],$atts['height']);
+  }
+  add_shortcode( 'rspad300x250', 'rspad300x250_func' );
+  add_shortcode( 'rspad300x250', 'rspad300x250_func' );
+  add_shortcode( 'rspad336x280', 'rspad336x280_func' );
+  add_shortcode( 'rspad728x90', 'rspad728x90_func' );
+  add_shortcode( 'rspad300x600', 'rspad300x600_func' );
+  add_shortcode( 'rspad320x100', 'rspad320x100_func' );
+  add_shortcode( 'rspad468x60', 'rspad468x60_func' );
+  add_shortcode( 'rspad300x1050', 'rspad300x1050_func' );
+  add_shortcode( 'rspad970x90', 'rspad970x90_func' );
+  ?>
+  <?php //function for shortcode with height and width as parameters
+  function adsenseshortcutad($x, $y) {
+    $options = get_option('RSP_options');
+    if (!get_option('RSP_options')) {
+      return 'Configure RSP settings!';
+    }
+    /*$position = ''; //not needed as the user selects the position of the ad when using shortocdes
+    if (array_key_exists('radio_option1', $options)) {
+      $position =  $options['radio_option1'];
+    }*/           //get the admin pecentage
+    global $post;
+    $authorId = $post->ID;
+
+    $adpercent = $options['adshare_percentage']; //store both adsense pub ids(author and admin)
+    if(get_the_author_meta( 'RSP_text_string', $authorId ) != ""){
+      $input1 = $options['RSP_text_string'];
+      $input2 = get_the_author_meta( 'RSP_text_string', $authorId );
+    } else {
+      $input1 = $options['RSP_text_string'];
+      $input2 = $input1;
+    }            //randomize the admin/author accordingly
+    if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
+    if ($input == 'pub-0000') {
+      return 'Configure PUB ID!';
+    }
+    $ad_content = '<div align=center><script type="text/javascript"><!--
+    google_ad_client = "ca-'.$flag.'";
+    google_ad_width = '.$x.';
+    google_ad_height = '.$y.';
+    //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
+    return '<br />'.$ad_content.'<br />';
+} ?>

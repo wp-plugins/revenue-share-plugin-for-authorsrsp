@@ -69,7 +69,7 @@ function adsensewidgetad($x, $y) {
             if ($input == 'pub-0000') {
                 return 'Configure PUB ID!';
             }
-        $ad_content = '<div align=center style="background-color:black;"><script type="text/javascript"><!--
+        $ad_content = '<div align=center><script type="text/javascript"><!--
 google_ad_client = "ca-'.$flag.'";
 google_ad_width = '.$x.';
 google_ad_height = '.$y.';
