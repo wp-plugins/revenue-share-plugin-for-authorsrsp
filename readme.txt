@@ -17,7 +17,7 @@ This plugin helps you to give a small reward to your guest blog writers in terms
 
 This plugin adds a field to all your blog post authors' profiles for inserting their Google adsense publisher id and creates a Settings page which will be accessible to admin of the website. The settings page include a field to fill up admin's adsense pub id as well as the position where the ad should be displayed along with the option to add a widget on the sidebar.
 
-= Features: =<br /> 
+= Features: =<br />
 1. Revenue for Both Admins and Authors<br />
 2. Select the Ad spot from Top/Bottom/Middle<br />
 3. No credit link on your blog<br />
