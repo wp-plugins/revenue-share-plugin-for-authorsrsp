@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 This plugin enables adsense revenue sharing for authors on your wordpress site.
 
 == Description ==
-This plugin helps you to give a small reward to your guest blog writers in terms of revenue. Their own advertisements will be displayed for all their posts on your blog. The for 50% of the impressions. For this they just have to fill up a field in their profile section with their adsense publisher id.
+This plugin helps you to give a small reward to your guest blog writers in terms of revenue. Their own advertisements will be displayed for all their posts on your blog. Administrators can set the percentage of how much the admin ad is displayed. For this they just have to fill up a field in their profile section with their adsense publisher id.
 
 This plugin adds a field to all your blog post authors' profiles for inserting their Google adsense publisher id and creates a Settings page which will be accessible to admin of the website. The settings page include a field to fill up admin's adsense pub id as well as the position where the ad should be displayed along with the option to add a widget on the sidebar.
 
