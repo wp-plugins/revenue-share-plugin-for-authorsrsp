@@ -3,7 +3,7 @@
 Plugin Name: Revenue Share for Authors(RSP)
 Plugin URI: http://obscurant1st.biz
 Description: The plugin enables revenue sharing for authors on your wordpress site.
-Version: 2.0.2
+Version: 2.0.3
 Author: Plato P.
 Author URI: http://www.techtuft.com
 License: GPL2
@@ -102,6 +102,7 @@ License: GPL2
         <option value='Top' <?php selected( $options['radio_option1'], 'Top' ); ?>>Top Spot</option>
         <option value='Middle' <?php selected( $options['radio_option1'], 'Middle' ); ?>>Middle Spot</option>
         <option value='Bottom' <?php selected( $options['radio_option1'], 'Bottom' ); ?>>Bottom Spot</option>
+        <option value='Disabled' <?php selected( $options['radio_option1'], 'Disabled' ); ?>>Disabled</option>
     </select>
    <br />
 <?php } ?>
@@ -151,25 +152,26 @@ function adsense_ad($content) {
     if ($input[0] == 'pub-0000') {
         return $content;
     }
-$ad_content = '<div align=center><script type="text/javascript"><!--
+    $ad_content = '<div align=center><script type="text/javascript"><!--
 google_ad_client = "ca-'.$flag.'";
 google_ad_width = 468;
 google_ad_height = 60;
 //-->
 </script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
-    if($position == 'Top') {
-        return $ad_content.'<br />'.$content;
-    }
-    if($position == 'Bottom') {
-        return $content.'<br />'.$ad_content;
-    }
-    if($position == 'Middle') {
-        $count_words = strlen($content)/2;
-        $insert_ad = strpos($content, '. ', $count_words);
-        $ad_content = '<br />'.$ad_content.'<br />';
-        return substr_replace($content, $ad_content, $insert_ad+2, 0);
-    }
+
+  if($position == 'Top') {
+    return $ad_content.'<br />'.$content;
+  } else if($position == 'Bottom') {
+    return $content.'<br />'.$ad_content;
+  } else if($position == 'Middle') {
+    $count_words = strlen($content)/2;
+    $insert_ad = strpos($content, '. ', $count_words);
+    $ad_content = '<br />'.$ad_content.'<br />';
+    return substr_replace($content, $ad_content, $insert_ad+2, 0);
+  } else if($position == 'Disabled') {
+    return $content;
+  }
 }
 add_filter('the_content', 'adsense_ad');
 ?>
