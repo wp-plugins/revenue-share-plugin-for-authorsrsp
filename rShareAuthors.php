@@ -11,11 +11,8 @@ License: GPL2
 ?>
 <?php
 /*  Copyright 2015  Plato P.  (email : plato.puthur@gmail.com)
-
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License, version 2, as published by the Free Software Foundation.
-
     This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
     You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 ?>
@@ -71,7 +68,7 @@ License: GPL2
         </form></div>
     </div>
 <?php
-}?>
+} ?>
 <?php // add the admin settings and such
     add_action('admin_init', 'RSP_admin_init');
     function RSP_admin_init(){
@@ -81,13 +78,12 @@ License: GPL2
         add_settings_field('RSP_text_string', 'RSP Adsense Pub Id', 'RSP_setting_string', 'RSP_plugin', 'RSP_main');
         add_settings_field('radio_option1', 'RSP Adsense AD Spot', 'RSP_setting_position', 'RSP_plugin', 'RSP_main');
         add_settings_field('adshare_percentage', 'RSP Author Adshare Percent', 'RSP_setting_percent', 'RSP_plugin', 'RSP_main');
-}?>
+} ?>
 <?php // validate our options
     function RSP_options_validate($input) {
         $options = get_option('RSP_options');
         return $input;
-}
-?>
+} ?>
 <?php function RSP_setting_string() {
         $options = get_option('RSP_options');
         echo "<input id='RSP_main' name='RSP_options[RSP_text_string]' size='25' type='text' value='{$options['RSP_text_string']}' />"; ?><br>
@@ -95,7 +91,7 @@ License: GPL2
 <?php function RSP_setting_percent() {
   $options = get_option('RSP_options');
   echo "<input id='RSP_main' name='RSP_options[adshare_percentage]' maxlength='2' size='2' type='text' value='{$options['adshare_percentage']}' />"; ?><br>
-  <?php } ?>
+<?php } ?>
 <?php function RSP_setting_position() {
     $options = get_option('RSP_options'); ?>
     <select id='RSP_main' name="RSP_options[radio_option1]">
@@ -123,7 +119,7 @@ add_action( 'edit_user_profile', 'adshare_profile_fields' );
                 </td>
             </tr>
         </table>
-    <?php }
+<?php }
     add_action( 'personal_options_update', 'adshare_save_profile_fields' );
     add_action( 'edit_user_profile_update', 'adshare_save_profile_fields' );
     function adshare_save_profile_fields( $user_id ) {
@@ -261,7 +257,7 @@ add_filter('the_content', 'adsense_ad');
   add_shortcode( 'rspad300x1050', 'rspad300x1050_func' );
   add_shortcode( 'rspad970x90', 'rspad970x90_func' );
   ?>
-  <?php //function for shortcode with height and width as parameters
+<?php //function for shortcode with height and width as parameters
   function adsenseshortcutad($x, $y) {
     $options = get_option('RSP_options');
     if (!get_option('RSP_options')) {

@@ -38,8 +38,7 @@ class rspwidget extends WP_Widget {
 <?php
     }    // Updating widget replacing old instances with new
     public function update( $new_instance, $old_instance ) {
-            $instance = array();
-            //$instance = $old_instance;
+            $instance = array();            //$instance = $old_instance;
             $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
             $instance['widgetads'] = ( ! empty( $new_instance['widgetads'] ) ) ? strip_tags( $new_instance['widgetads'] ) : '';
             return $instance;
@@ -56,7 +55,6 @@ function adsensewidgetad($x, $y) {
             }            //get the admin pecentage
             global $post;
             $authorId = $post->ID;
-
             $adpercent = $options['adshare_percentage']; //store both adsense pub ids(author and admin)
             if(get_the_author_meta( 'RSP_text_string', $authorId ) != ""){
                 $input1 = $options['RSP_text_string'];
