@@ -3,7 +3,7 @@
 Plugin Name: Revenue Share for Authors(RSP)
 Plugin URI: http://obscurant1st.biz
 Description: The plugin enables revenue sharing for authors on your wordpress site.
-Version: 2.0.3
+Version: 2.0.4
 Author: Plato P.
 Author URI: http://www.techtuft.com
 License: GPL2
@@ -159,7 +159,6 @@ google_ad_height = 60;
 //-->
 </script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
-
   if($position == 'Top') {
     return $ad_content.'<br />'.$content;
   } else if($position == 'Bottom') {
@@ -194,7 +193,6 @@ add_filter('the_content', 'adsense_ad');
       'width' => '300',
       'height' => '250',
     ), $atts, 'rspad300x250' );
-
     return adsenseshortcutad($atts['width'],$atts['height']);
   }
   function rspad336x280_func( $atts ) {
@@ -203,7 +201,6 @@ add_filter('the_content', 'adsense_ad');
       'width' => '336',
       'height' => '280',
     ), $atts, 'rspad336x280' );
-
     return adsenseshortcutad($atts['width'],$atts['height']);
   }
   function rspad728x90_func( $atts ) {
@@ -212,7 +209,6 @@ add_filter('the_content', 'adsense_ad');
       'width' => '728',
       'height' => '90',
     ), $atts, 'rspad728x90' );
-
     return adsenseshortcutad($atts['width'],$atts['height']);
   }
   function rspad300x600_func( $atts ) {
@@ -221,7 +217,6 @@ add_filter('the_content', 'adsense_ad');
       'width' => '300',
       'height' => '600',
     ), $atts, 'rspad300x600' );
-
     return adsenseshortcutad($atts['width'],$atts['height']);
   }
   function rspad320x100_func( $atts ) {
@@ -230,7 +225,6 @@ add_filter('the_content', 'adsense_ad');
       'width' => '320',
       'height' => '100',
     ), $atts, 'rspad320x100' );
-
     return adsenseshortcutad($atts['width'],$atts['height']);
   }
   function rspad468x60_func( $atts ) {
@@ -239,7 +233,6 @@ add_filter('the_content', 'adsense_ad');
       'width' => '468',
       'height' => '60',
     ), $atts, 'rspad468x60' );
-
     return adsenseshortcutad($atts['width'],$atts['height']);
   }
   function rspad300x1050_func( $atts ) {
@@ -248,7 +241,6 @@ add_filter('the_content', 'adsense_ad');
       'width' => '300',
       'height' => '1050',
     ), $atts, 'rspad300x1050' );
-
     return adsenseshortcutad($atts['width'],$atts['height']);
   }
   function rspad970x90_func( $atts ) {
@@ -257,7 +249,6 @@ add_filter('the_content', 'adsense_ad');
       'width' => '970',
       'height' => '90',
     ), $atts, 'rspad970x90' );
-
     return adsenseshortcutad($atts['width'],$atts['height']);
   }
   add_shortcode( 'rspad300x250', 'rspad300x250_func' );
@@ -275,14 +266,9 @@ add_filter('the_content', 'adsense_ad');
     $options = get_option('RSP_options');
     if (!get_option('RSP_options')) {
       return 'Configure RSP settings!';
-    }
-    /*$position = ''; //not needed as the user selects the position of the ad when using shortocdes
-    if (array_key_exists('radio_option1', $options)) {
-      $position =  $options['radio_option1'];
-    }*/           //get the admin pecentage
+    }         //get the admin pecentage
     global $post;
     $authorId = $post->ID;
-
     $adpercent = $options['adshare_percentage']; //store both adsense pub ids(author and admin)
     if(get_the_author_meta( 'RSP_text_string', $authorId ) != ""){
       $input1 = $options['RSP_text_string'];

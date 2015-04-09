@@ -4,7 +4,7 @@ Donate link: http://wp.me/P4VWAr-bU
 Tags: Adense, Free Revenue Share, Guest Bloggers, plugin, Revenue Share, Wordpress, Wordpress plugin, Wordpress Revenue Share
 Requires at least: 3.0.1
 Tested up to: 4.2
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLV2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,8 @@ You can contact me via my personal website http://www.techtuft.com
 * Added 8 different shortcodes.
 = 2.0.3 =
 * Added option to disable in-post ad!
+= 2.0.4 =
+* Bug fix release
 
 == Upgrade Notice ==
 = 1.0.2 =
@@ -77,3 +79,5 @@ You can contact me via my personal website http://www.techtuft.com
 * Shortcodes now available
 = 2.0.3 =
 * You can now disable inpost ads.
+= 2.0.4 =
+* Bug Fix Release

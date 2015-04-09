@@ -89,8 +89,7 @@ google_ad_height = '.$y.';
             return substr_replace($content, $ad_content, $insert_ad+2, 0);
         }
             return $ad_content;
-    }
-// Register and load the widget
+    } // Register and load the widget
 function rsp_load_widget() {
 	register_widget( 'rspwidget' );
 }
