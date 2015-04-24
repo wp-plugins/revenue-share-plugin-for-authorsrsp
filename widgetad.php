@@ -13,7 +13,7 @@ class rspwidget extends WP_Widget {
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
 		} // before and after widget arguments are defined by themes |  This is where you run the code and display the output
-        $addimensions = split ("\x", $instance['widgetads']);
+        $addimensions = explode ("x", $instance['widgetads']);
         echo adsensewidgetad($addimensions[0], $addimensions[1]);
         echo $args['after_widget'];
         global $post;
@@ -22,7 +22,7 @@ class rspwidget extends WP_Widget {
     public function form( $instance ) {
         $title = ! empty( $instance['title'] ) ? $instance['title'] : __( '', 'rspwidget_ad' );
         $widgetads = ! empty( $instance['widgetads'] ) ? $instance['widgetads'] : __( '', 'rspwidget_ad' );
-?> // Widget admin form
+// Widget admin form ?>
     <p>
         <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'title' ); ?></label>
         <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
@@ -64,9 +64,9 @@ function adsensewidgetad($x, $y) {
                 $input2 = $input1;
             }            //randomize the admin/author accordingly
             if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
-            if ($input == 'pub-0000') {
+            /*if ($input1 == 'pub-0000') {
                 return 'Configure PUB ID!';
-            }
+            }*/
         $ad_content = '<div align=center><script type="text/javascript"><!--
 google_ad_client = "ca-'.$flag.'";
 google_ad_width = '.$x.';
@@ -74,19 +74,7 @@ google_ad_height = '.$y.';
 //-->
 </script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
-        if($position == 'Top') {
-            return $ad_content.'<br />'.$content;
-        }
-        if($position == 'Bottom') {
-            return $content.'<br />'.$ad_content;
-        }
-        if($position == 'Middle') {
-            $count_words = strlen($content)/2;
-            $insert_ad = strpos($content, '. ', $count_words);
-            $ad_content = '<br />'.$ad_content.'<br />';
-            return substr_replace($content, $ad_content, $insert_ad+2, 0);
-        }
-            return $ad_content;
+return $ad_content;
     } // Register and load the widget
 function rsp_load_widget() {
 	register_widget( 'rspwidget' );

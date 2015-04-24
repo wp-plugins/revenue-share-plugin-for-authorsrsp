@@ -3,7 +3,7 @@
 Plugin Name: Revenue Share for Authors(RSP)
 Plugin URI: http://obscurant1st.biz
 Description: The plugin enables revenue sharing for authors on your wordpress site.
-Version: 2.0.4
+Version: 2.0.5
 Author: Plato P.
 Author URI: http://www.techtuft.com
 License: GPL2
@@ -78,6 +78,7 @@ License: GPL2
         add_settings_field('RSP_text_string', 'RSP Adsense Pub Id', 'RSP_setting_string', 'RSP_plugin', 'RSP_main');
         add_settings_field('radio_option1', 'RSP Adsense AD Spot', 'RSP_setting_position', 'RSP_plugin', 'RSP_main');
         add_settings_field('adshare_percentage', 'RSP Author Adshare Percent', 'RSP_setting_percent', 'RSP_plugin', 'RSP_main');
+        add_settings_field('rsp_user_level', 'Lowest Level of User with Adsense Share', 'RSP_setting_usrlvl', 'RSP_plugin', 'RSP_main');
 } ?>
 <?php // validate our options
     function RSP_options_validate($input) {
@@ -102,13 +103,39 @@ License: GPL2
     </select>
    <br />
 <?php } ?>
+<?php function RSP_setting_usrlvl() {
+  $options = get_option('RSP_options'); ?>
+  <select id='RSP_main' name="RSP_options[rsp_user_level]">
+      <option value='Admin' <?php selected( $options['rsp_user_level'], 'Admin' ); ?>>Admin</option>
+      <option value='Editor' <?php selected( $options['rsp_user_level'], 'Editor' ); ?>>Editor</option>
+      <option value='Author' <?php selected( $options['rsp_user_level'], 'Author' ); ?>>Author</option>
+      <option value='Contributor' <?php selected( $options['rsp_user_level'], 'Contributor' ); ?>>Contributor</option>
+  </select>
+ <br />
+<?php } ?>
 <?php function RSP_section_text() {
 echo '';
 } ?>
 <?php
 add_action( 'show_user_profile', 'adshare_profile_fields' );
 add_action( 'edit_user_profile', 'adshare_profile_fields' );
-    function adshare_profile_fields( $user ) { ?>
+    function adshare_profile_fields( $user ) {
+      $options = get_option('RSP_options');
+      $usrlvl =  $options['rsp_user_level'];
+      if($usrlvl == "Contributor") {
+        if( !current_user_can( 'edit_posts' ) )
+        return;
+      } else if($usrlvl == "Author") {
+        if( !current_user_can('publish_posts'))
+        return;
+      } else if($usrlvl == "Editor") {
+        if( !current_user_can('delete_others_posts'))
+        return;
+      } else {
+        if( !current_user_Can('edit_dashboard'))
+        return;
+      }
+      ?>
         <h3>Revenu Share For Authors:</h3>
         <table class="form-table">
             <tr>
@@ -123,7 +150,22 @@ add_action( 'edit_user_profile', 'adshare_profile_fields' );
     add_action( 'personal_options_update', 'adshare_save_profile_fields' );
     add_action( 'edit_user_profile_update', 'adshare_save_profile_fields' );
     function adshare_save_profile_fields( $user_id ) {
-        update_usermeta( $user_id, 'RSP_text_string', $_POST['RSP_text_string'] );
+      $options = get_option('RSP_options');
+      $usrlvl =  $options['rsp_user_level'];
+      if($usrlvl == "Contributor") {
+        if( !current_user_can( 'edit_posts' ) )
+        return;
+      } else if($usrlvl == "Author") {
+        if( !current_user_can('publish_posts'))
+        return;
+      } else if($usrlvl == "Editor") {
+        if( !current_user_can('delete_others_posts'))
+        return;
+      } else {
+        if( !current_user_Can('edit_dashboard'))
+        return;
+      }
+      update_usermeta( $user_id, 'RSP_text_string', $_POST['RSP_text_string'] );
     }
 function adsense_ad($content) {
     $options = get_option('RSP_options');
@@ -145,7 +187,7 @@ function adsense_ad($content) {
       $input2 = $input1;
     }//randomize the admin/author accordingly
     if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
-    if ($input[0] == 'pub-0000') {
+    if ($input1 == 'pub-0000') {
         return $content;
     }
     $ad_content = '<div align=center><script type="text/javascript"><!--
@@ -274,9 +316,9 @@ add_filter('the_content', 'adsense_ad');
       $input2 = $input1;
     }            //randomize the admin/author accordingly
     if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
-    if ($input == 'pub-0000') {
+    /*if ($input1 == 'pub-0000') {
       return 'Configure PUB ID!';
-    }
+    }*/
     $ad_content = '<div align=center><script type="text/javascript"><!--
     google_ad_client = "ca-'.$flag.'";
     google_ad_width = '.$x.';

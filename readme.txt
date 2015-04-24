@@ -4,7 +4,7 @@ Donate link: http://wp.me/P4VWAr-bU
 Tags: Adense, Free Revenue Share, Guest Bloggers, plugin, Revenue Share, Wordpress, Wordpress plugin, Wordpress Revenue Share
 Requires at least: 3.0.1
 Tested up to: 4.2
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLV2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,9 +21,10 @@ This plugin adds a field to all your blog post authors' profiles for inserting t
 3. No credit link on your blog<br />
 4. The simplest settings page you have ever seen for a plugin.<br />
 5. Supports 468x60px ads(easy customization).<br />
-6. *New* Now supports widget ads <br />
-7. *New* Can change the ad percentage like you guys requested. <br />
-8. *New* Added 8 different short codes for 8 different ad sizes. <br />
+6. Now supports widget ads <br />
+7. Can change the ad percentage like you guys requested. <br />
+8. Added 8 different short codes for 8 different ad sizes. <br />
+9. *NEW* Added option to userlevel permissions to adsense share. Lowest user level is Contributor.
 
 = Available Shortcodes: =<br />
 * [rspad300x250]<br />
@@ -67,6 +68,8 @@ You can contact me via my personal website http://www.techtuft.com
 * Added option to disable in-post ad!
 = 2.0.4 =
 * Bug fix release
+= 2.0.5 =
+* Added option to userlevel permissions to adsense share. Lowest user level is Contributor.
 
 == Upgrade Notice ==
 = 1.0.2 =
@@ -81,3 +84,5 @@ You can contact me via my personal website http://www.techtuft.com
 * You can now disable inpost ads.
 = 2.0.4 =
 * Bug Fix Release
+= 2.0.5 =
+* Userlevel permissions.
