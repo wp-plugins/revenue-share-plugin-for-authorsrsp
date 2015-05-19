@@ -64,3 +64,10 @@ border:1px solid #616261; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
  background-image: -o-linear-gradient(top, #646464, #282828);
  background-image: linear-gradient(top, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
 }
+.widgethelp {
+	display:block;
+	border:1px solid #4a4b4a;
+	background-color: #E4E4E4;
+	border-radius: 5px;
+	margin: 10px;
+}

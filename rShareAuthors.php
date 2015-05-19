@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Revenue Share for Authors(RSP)
-Plugin URI: http://techtuft.com
+Plugin URI: http://www.techtuft.com/forums/
 Description: The plugin enables revenue sharing for authors on your wordpress site.
-Version: 2.0.5
+Version: 2.1.0
 Author: Plato P.
 Author URI: http://www.techtuft.com
 License: GPL2
@@ -39,16 +39,16 @@ License: GPL2
 <?php
                                  $options = get_option('RSP_options');
                                  echo '<br /><h3>Current Admin Settings</h3>';
-                                 echo 'Adsense Publisher Id:<b>';
+                                 echo 'Adsense Publisher Id:';
                                  echo $options['RSP_text_string'];
                                  echo '<br />';
-                                 echo '</b>Adsense Ads will be displayed at the following spots in your post: <b> ';
+                                 echo 'Adsense Ads will be displayed at the following spots in your post: ';
                                  echo $options['radio_option1'];
                                  echo '<br />';
-                                 echo '</b>Adsense Ads percentage of Authors:<b> ';
+                                 echo 'Adsense Ads percentage of Authors: ';
                                  echo $options['adshare_percentage'];
-?></b>
-    <br /><br /><b>**Note: </b><i>You can choose to display the ads on the sidebar by adding the RSP widget to your sidebar by dragging and dropping from your admin widgets area.</i><b>**</b><br />
+                                 echo '<br />';
+?>
     </div>
 <div class="right_rsp">
     <div id="aligncenter">
@@ -66,6 +66,14 @@ License: GPL2
             <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
             <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
         </form></div>
+        <div align=center>
+          <div class="widgethelp">
+            <h1> Help!!!</h1>
+            <p>All requests for help, new features and bug reports should be posted at <h2><a href="http://techtuft.com/forums">RSP Help - Techtuft</a><h2></p>
+          </div>
+            <div class="widgethelp">
+              <p>**Note:<i>You can choose to display the ads on the sidebar by adding the RSP widget to your sidebar by dragging and dropping from your admin widgets area.</i></p>
+            </div>
     </div>
 <?php
 } ?>
@@ -76,6 +84,7 @@ License: GPL2
 <?php
         add_settings_section('RSP_main', '', 'RSP_section_text', 'RSP_plugin');
         add_settings_field('RSP_text_string', 'RSP Adsense Pub Id', 'RSP_setting_string', 'RSP_plugin', 'RSP_main');
+        add_settings_field('RSP_adslot', 'RSP Adsense Admin Adslot', 'RSP_setting_adslot', 'RSP_plugin', 'RSP_main');
         add_settings_field('radio_option1', 'RSP Adsense AD Spot', 'RSP_setting_position', 'RSP_plugin', 'RSP_main');
         add_settings_field('adshare_percentage', 'RSP Author Adshare Percent', 'RSP_setting_percent', 'RSP_plugin', 'RSP_main');
         add_settings_field('rsp_user_level', 'Lowest Level of User with Adsense Share', 'RSP_setting_usrlvl', 'RSP_plugin', 'RSP_main');
@@ -88,6 +97,10 @@ License: GPL2
 <?php function RSP_setting_string() {
         $options = get_option('RSP_options');
         echo "<input id='RSP_main' name='RSP_options[RSP_text_string]' size='25' type='text' value='{$options['RSP_text_string']}' />"; ?><br>
+<?php } ?>
+<?php function RSP_setting_adslot() {
+        $options = get_option('RSP_options');
+        echo "<input id='RSP_main' name='RSP_options[RSP_adslot]' size='25' type='text' value='{$options['RSP_adslot']}' />"; ?><br>
 <?php } ?>
 <?php function RSP_setting_percent() {
   $options = get_option('RSP_options');
@@ -144,6 +157,11 @@ add_action( 'edit_user_profile', 'adshare_profile_fields' );
                     <input type="text" name="RSP_text_string" id="RSP_text_string" value="<?php echo esc_attr( get_the_author_meta( 'RSP_text_string', $user->ID ) ); ?>" class="regular-text" /><br />
                     <span class="description">Add your Publisher ID</span>
                 </td>
+                <th><label for="adslotid">Adsense Adlost/Adunit ID</label></th>
+                <td>
+                    <input type="text" name="RSP_adslot" id="RSP_adslot" value="<?php echo esc_attr( get_the_author_meta( 'RSP_adslot', $user->ID ) ); ?>" class="regular-text" /><br />
+                    <span class="description">Add your Adunit ID/Adslot</span>
+                </td>
             </tr>
         </table>
 <?php }
@@ -165,7 +183,8 @@ add_action( 'edit_user_profile', 'adshare_profile_fields' );
         if( !current_user_Can('edit_dashboard'))
         return;
       }
-      update_usermeta( $user_id, 'RSP_text_string', $_POST['RSP_text_string'] );
+      update_usermeta( $user_id, 'RSP_text_string', sanitize_text_field($_POST['RSP_text_string']) );
+      update_usermeta( $user_id, 'RSP_adslot', sanitize_text_field($_POST['RSP_adslot']) );
     }
 function adsense_ad($content) {
     $options = get_option('RSP_options');
@@ -186,17 +205,32 @@ function adsense_ad($content) {
       $input1 = $options['RSP_text_string'];
       $input2 = $input1;
     }//randomize the admin/author accordingly
-    if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
+    if(get_the_author_meta( 'RSP_adslot', $authorId ) != ""){
+      $input3 = $options['RSP_adslot'];
+      $input4 = get_the_author_meta( 'RSP_adslot', $authorId );
+    } else {
+      $input3 = $options['RSP_adslot'];
+      $input4 = $input1;
+    }
+    if (rand(1,100) > $adpercent) {
+      $flag = $input1;
+      $adslot = $input3;
+    } else {
+      $flag = $input2;
+      $adslot = $input4;
+    }
     if ($input1 == 'pub-0000') {
         return $content;
     }
-    $ad_content = '<div align=center><script type="text/javascript"><!--
-google_ad_client = "ca-'.$flag.'";
-google_ad_width = 468;
-google_ad_height = 60;
-//-->
-</script>
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
+    $ad_content = '<div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 468x60, created 9/9/10 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:468px;height:60px"
+         data-ad-client="ca-'.$flag.'"
+         data-ad-slot="'.$adslot.'"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script></div>';
   if($position == 'Top') {
     return $ad_content.'<br />'.$content;
   } else if($position == 'Bottom') {
@@ -315,16 +349,28 @@ add_filter('the_content', 'adsense_ad');
       $input1 = $options['RSP_text_string'];
       $input2 = $input1;
     }            //randomize the admin/author accordingly
-    if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
-    /*if ($input1 == 'pub-0000') {
-      return 'Configure PUB ID!';
-    }*/
-    $ad_content = '<div align=center><script type="text/javascript"><!--
-    google_ad_client = "ca-'.$flag.'";
-    google_ad_width = '.$x.';
-    google_ad_height = '.$y.';
-    //-->
-    </script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
+    if(get_the_author_meta( 'RSP_adslot', $authorId ) != ""){
+      $input3 = $options['RSP_adslot'];
+      $input4 = get_the_author_meta( 'RSP_adslot', $authorId );
+    } else {
+      $input3 = $options['RSP_adslot'];
+      $input4 = $input1;
+    }
+    if (rand(1,100) > $adpercent) {
+      $flag = $input1;
+      $adslot = $input3;
+    } else {
+      $flag = $input2;
+      $adslot = $input4;
+    }
+    $ad_content = '<div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 468x60, created 9/9/10 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:'.$x.'px;height:'.$y.'px"
+         data-ad-client="ca-'.$flag.'"
+         data-ad-slot="'.$adslot.'"></ins>
+         <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+         </script></div>';
     return '<br />'.$ad_content.'<br />';
 } ?>

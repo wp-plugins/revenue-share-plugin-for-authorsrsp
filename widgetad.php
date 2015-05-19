@@ -63,17 +63,29 @@ function adsensewidgetad($x, $y) {
                 $input1 = $options['RSP_text_string'];
                 $input2 = $input1;
             }            //randomize the admin/author accordingly
-            if (rand(1,100) > $adpercent) $flag = $input1; else $flag = $input2;
-            /*if ($input1 == 'pub-0000') {
-                return 'Configure PUB ID!';
-            }*/
-        $ad_content = '<div align=center><script type="text/javascript"><!--
-google_ad_client = "ca-'.$flag.'";
-google_ad_width = '.$x.';
-google_ad_height = '.$y.';
-//-->
-</script>
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
+            if(get_the_author_meta( 'RSP_adslot', $authorId ) != ""){
+              $input3 = $options['RSP_adslot'];
+              $input4 = get_the_author_meta( 'RSP_adslot', $authorId );
+            } else {
+              $input3 = $options['RSP_adslot'];
+              $input4 = $input1;
+            }
+            if (rand(1,100) > $adpercent) {
+              $flag = $input1;
+              $adslot = $input3;
+            } else {
+              $flag = $input2;
+              $adslot = $input4;
+            }
+            $ad_content = '<div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 468x60, created 9/9/10 -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:'.$x.'px;height:'.$y.'px"
+                 data-ad-client="ca-'.$flag.'"
+                 data-ad-slot="'.$adslot.'"></ins>
+                 <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+                 </script></div>';
 return $ad_content;
     } // Register and load the widget
 function rsp_load_widget() {

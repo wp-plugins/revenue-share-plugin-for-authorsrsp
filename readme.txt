@@ -4,7 +4,7 @@ Donate link: http://wp.me/P4VWAr-bU
 Tags: Adense, Free Revenue Share, Guest Bloggers, plugin, Revenue Share, Wordpress, Wordpress plugin, Wordpress Revenue Share
 Requires at least: 3.0.1
 Tested up to: 4.2
-Stable tag: 2.0.5
+Stable tag: 2.1
 License: GPLV2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,8 @@ You can contact me via my personal website http://www.techtuft.com
 * Bug fix release
 = 2.0.5 =
 * Added option to userlevel permissions to adsense share. Lowest user level is Contributor.
+= 2.1 =
+* Fixed a couple of security holes and several enhancements
 
 == Upgrade Notice ==
 = 1.0.2 =
@@ -86,3 +88,5 @@ You can contact me via my personal website http://www.techtuft.com
 * Bug Fix Release
 = 2.0.5 =
 * Userlevel permissions.
+= 2.1 =
+* Fixed a couple of security holes and several enhancements
