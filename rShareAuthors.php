@@ -196,7 +196,7 @@ function adsense_ad($content) {
         $position =  $options['radio_option1'];
     }
     global $post;
-    $authorId = $post->ID;
+    $authorId = $post->post_author;
     $adpercent = $options['adshare_percentage']; //store both adsense pub ids(author and admin)
     if(get_the_author_meta( 'RSP_text_string', $authorId ) != ""){
       $input1 = $options['RSP_text_string'];
@@ -210,7 +210,7 @@ function adsense_ad($content) {
       $input4 = get_the_author_meta( 'RSP_adslot', $authorId );
     } else {
       $input3 = $options['RSP_adslot'];
-      $input4 = $input1;
+      $input4 = $input3;
     }
     if (rand(1,100) > $adpercent) {
       $flag = $input1;
@@ -340,7 +340,7 @@ add_filter('the_content', 'adsense_ad');
       return 'Configure RSP settings!';
     }         //get the admin pecentage
     global $post;
-    $authorId = $post->ID;
+    $authorId = $post->post_author;
     $adpercent = $options['adshare_percentage']; //store both adsense pub ids(author and admin)
     if(get_the_author_meta( 'RSP_text_string', $authorId ) != ""){
       $input1 = $options['RSP_text_string'];
@@ -354,7 +354,7 @@ add_filter('the_content', 'adsense_ad');
       $input4 = get_the_author_meta( 'RSP_adslot', $authorId );
     } else {
       $input3 = $options['RSP_adslot'];
-      $input4 = $input1;
+      $input4 = $input3;
     }
     if (rand(1,100) > $adpercent) {
       $flag = $input1;

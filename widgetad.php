@@ -17,7 +17,7 @@ class rspwidget extends WP_Widget {
         echo adsensewidgetad($addimensions[0], $addimensions[1]);
         echo $args['after_widget'];
         global $post;
-        $authorId = $post->ID;
+        $authorId = $post->post_author;
     }    // Widget Backend
     public function form( $instance ) {
         $title = ! empty( $instance['title'] ) ? $instance['title'] : __( '', 'rspwidget_ad' );
@@ -54,7 +54,7 @@ function adsensewidgetad($x, $y) {
                 $position =  $options['radio_option1'];
             }            //get the admin pecentage
             global $post;
-            $authorId = $post->ID;
+            $authorId = $post->post_author;
             $adpercent = $options['adshare_percentage']; //store both adsense pub ids(author and admin)
             if(get_the_author_meta( 'RSP_text_string', $authorId ) != ""){
                 $input1 = $options['RSP_text_string'];
@@ -68,7 +68,7 @@ function adsensewidgetad($x, $y) {
               $input4 = get_the_author_meta( 'RSP_adslot', $authorId );
             } else {
               $input3 = $options['RSP_adslot'];
-              $input4 = $input1;
+              $input4 = $input3;
             }
             if (rand(1,100) > $adpercent) {
               $flag = $input1;
