@@ -3,7 +3,7 @@
 Plugin Name: Revenue Share for Authors(RSP)
 Plugin URI: http://www.techtuft.com/forums/
 Description: The plugin enables revenue sharing for authors on your wordpress site.
-Version: 2.1.0
+Version: 2.1.1
 Author: Plato P.
 Author URI: http://www.techtuft.com
 License: GPL2
